@@ -11,9 +11,9 @@ class Tipe extends Model
     protected $table = 'tipe';
 
     
-    public function kategoris()
+    public function kategori()
     {
-        return $this->hasMany(Kategori::class);
+        return $this->hasMany(Kategori::class, 'tipe_id');
     }
     protected $fillable = [
         'nama_tipe',

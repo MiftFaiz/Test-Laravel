@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tipe;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class TipeController extends Controller
@@ -48,9 +49,19 @@ class TipeController extends Controller
         return redirect()->route('tipe.index')->with('success', 'Tipe updated successfully.');
     }
 
-    public function destroy(Tipe $tipe)
+    public function destroy($id)
     {
+        $tipe = Tipe::find($id);
+
+        // Cek apakah tipe memiliki kategori terkait
+        if ($tipe->kategori()->count() > 0) {
+            return redirect()->back()->with('error', 'Tipe ini tidak bisa dihapus karena ada kategori yang terkait.');
+        }
+
+        // Jika tidak ada kategori yang terkait, hapus tipe
         $tipe->delete();
-        return redirect()->route('tipe.index')->with('success', 'Tipe deleted successfully.');
+
+        return redirect()->route('tipe.index')->with('success', 'Tipe berhasil dihapus.');
     }
+
 }

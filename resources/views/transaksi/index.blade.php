@@ -25,11 +25,14 @@
         <tbody>
             @foreach ($transaksis as $transaksi)
                 <tr>
-                    <td>{{ $transaksi->id }}</td>
-                    <td>{{ $transaksi->kategori ? $transaksi->kategori->nama_kategori : 'Tidak Diketahui' }}</td>
-                    <td>{{ $transaksi->kategori->tipe ? $transaksi->kategori->tipe->nama_tipe : 'Tidak Diketahui' }}</td>
-                    <td>{{ $transaksi->total_biaya }}</td>
-                    <td>{{ $transaksi->tanggal_pemasukan }}</td>
+                <td>{{ $transaksi->id }}</td>
+                <td>{{ $transaksi->kategori ? $transaksi->kategori->nama_kategori : 'Tidak Diketahui' }}</td>
+                <td>
+                    {{ $transaksi->kategori && $transaksi->kategori->tipe ? $transaksi->kategori->tipe->nama_tipe : 'Tidak Diketahui' }}
+                </td>
+                <td>{{ $transaksi->total_biaya }}</td>
+                <td>{{ $transaksi->tanggal_pemasukan }}</td>
+
                     <td>
                         <a href="{{ route('transaksi.show', $transaksi->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>Lihat</a>
                         <a href="{{ route('transaksi.edit', $transaksi->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>Edit</a>

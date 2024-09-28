@@ -9,7 +9,14 @@
             <i class="fas fa-plus"></i> Tambah Kategori
         </a>
     </div>
-    
+    @if(session('success'))
+        <div class="alert alert-success mt-2">{{ session('success') }}</div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -24,7 +31,7 @@
             <tr>
                 <td>{{ $kategori->id }}</td>
                 <td>{{ $kategori->nama_kategori }}</td>
-                <td>{{ $kategori->tipe->nama_tipe }}</td> <!-- Menampilkan nama tipe -->
+                <td>{{ $kategori->tipe ? $kategori->tipe->nama_tipe : 'Tidak Diketahui' }}</td>
                 <td>
                     <a href="{{ route('kategori.show', $kategori->id) }}" class="btn btn-info btn-sm">
                         <i class="fas fa-eye"></i> Lihat
@@ -39,6 +46,7 @@
                             <i class="fas fa-trash"></i> Hapus
                         </button>
                     </form>
+
                 </td>
             </tr>
             @endforeach

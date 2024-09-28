@@ -11,6 +11,11 @@
     @if(session('success'))
         <div class="alert alert-success mt-2">{{ session('success') }}</div>
     @endif
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -31,8 +36,9 @@
                         <form action="{{ route('tipe.destroy', $tipe->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus Tipe ini?')"><i class="fas fa-trash"></i> Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus Tipe ini? Pastikan tidak ada kategori yang terkait.')"><i class="fas fa-trash"></i> Hapus</button>
                         </form>
+
                     </td>
                 </tr>
             @endforeach

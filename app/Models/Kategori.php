@@ -15,9 +15,9 @@ class Kategori extends Model
         return $this->belongsTo(Tipe::class);
     }
 
-    public function transaksis()
+    public function transaksi()
     {
-        return $this->hasMany(Transaksi::class);
+        return $this->hasMany(Transaksi::class, 'kategori_id');
     }
     protected $fillable = [
         'nama_kategori',
